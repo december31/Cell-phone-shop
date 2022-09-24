@@ -3,14 +3,16 @@ package com.cellphoneshop.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "`user`")
 public class User {
 
-	@Id
-	@Column(name = "email")
+	@Id @GeneratedValue
+	private long id;
+
 	private String email;
 
-	@Column(name = "password")
+	private String username;
+
 	private String password;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -19,8 +21,14 @@ public class User {
 	public User() {
 	}
 
-	public User(String email, String password) {
+	public User(String username, String email, String password) {
 		this.email = email;
+		this.password = password;
+		this.username = username;
+	}
+
+	public User(String username, String password) {
+		this.username = username;
 		this.password = password;
 	}
 
@@ -54,5 +62,21 @@ public class User {
 				"email: " + email + "\n" +
 				"password: " + password + "\n" +
 				"role: " + role.toString();
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

@@ -413,7 +413,7 @@ let saveUser = () => {
 	console.log("users: ", users)
 	$.ajax({
 		type: "POST",
-		url: "user/save-users",
+		url: "user/save",
 		data: {
 			"users": JSON.stringify(users),
 			"usersDeleted": JSON.stringify(usersDeleted)

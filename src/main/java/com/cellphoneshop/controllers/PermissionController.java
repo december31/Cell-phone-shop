@@ -38,12 +38,12 @@ public class PermissionController {
 		return permissionServices.getAllPermission();
 	}
 
-	@PostMapping(path = "new-permission")
+	@PostMapping(path = "new")
 	public String addNewPermission(HttpServletRequest request) {
 		Long roleId = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		Role role = roleServices.findById(roleId);
-		permissionServices.addNewPermission(new Permission(role, name));
+		permissionServices.addNewPermission(new Permission(name));
 		return ResponseTextConst.SUCCESS;
 	}
 }

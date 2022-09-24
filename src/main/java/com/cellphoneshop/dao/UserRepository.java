@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 	User findByEmail(String email);
-	User findByEmailAndPassword(String email, String password);
+	User findByUsernameAndPassword(String email, String password);
+
+	User findByUsername(String username);
 
 	@Modifying
 	@Transactional
