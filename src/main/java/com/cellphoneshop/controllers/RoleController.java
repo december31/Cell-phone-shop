@@ -32,7 +32,7 @@ public class RoleController {
 		return roleServices.getAllRoles();
 	}
 
-	@PostMapping(path = "new")
+	@PostMapping(path = "new-role")
 	public String addNewRole(HttpServletRequest request) {
 		Long roleId = Long.parseLong(request.getParameter("id"));
 		String roleName = request.getParameter("name");
@@ -42,7 +42,7 @@ public class RoleController {
 			return ResponseTextConst.SUCCESS;
 	}
 
-	@PostMapping(path = "delete")
+	@PostMapping(path = "delete-role")
 	public String deleteRole(HttpServletRequest request) {
 			Long roleId = Long.parseLong(request.getParameter("id"));
 			Role role = roleServices.findById(roleId);

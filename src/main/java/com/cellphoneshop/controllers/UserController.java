@@ -39,11 +39,11 @@ public class UserController {
 
 	@PostMapping(path = "sign-in")
 	public String userSignIn(HttpServletRequest request) throws JsonProcessingException {
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		if (username == null) return ResponseTextConst.FAILED;
+		if (email == null) return ResponseTextConst.FAILED;
 		else {
-			User user = new User(username, password);
+			User user = new User(email, password);
 
 			user = userServices.checkUser(user, false);
 			if (user != null) {
@@ -63,10 +63,12 @@ public class UserController {
 			if (token == null || token.equals("")) {
 				return ResponseTextConst.FAILED;
 			}
-
 			claims = Jwt.decodeJWT(token);
+
 			String userString = claims.get("user", String.class);
+
 			user = new ObjectMapper().readValue(userString, User.class);
+
 			user = userServices.checkUser(user, true);
 
 			if (user == null) {
@@ -81,13 +83,12 @@ public class UserController {
 
 	@PostMapping(path = "sign-up")
 	public String userSignUp(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
-		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		if (email == null || email.equals("")) return ResponseTextConst.FAILED;
 		else {
 
-			User user = new User(username, email, password);
+			User user = new User(email, password);
 			Role role = roleServices.findByName(RoleConst.USER);
 
 			if (null == role) return ResponseTextConst.FAILED;
@@ -101,7 +102,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("save")
+	@PostMapping("save-users")
 	public String saveAllUsers(HttpServletRequest request) throws JsonProcessingException {
 		User[] users = new ObjectMapper().readValue(request.getParameter("users"), User[].class);
 		User[] deletedUsers = new ObjectMapper().readValue(request.getParameter("usersDeleted"), User[].class);

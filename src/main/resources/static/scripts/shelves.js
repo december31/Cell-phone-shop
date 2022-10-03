@@ -136,7 +136,7 @@ let addNewPrdBtn = (shelves_content) => {
 		data.append("token", getToken());
 		data.append("category-id", addNewPrdForm.className);
 		$.ajax({
-			url: "product/new",
+			url: "product/new-product",
 			type: "POST",
 			enctype: "multipart/form-data",
 			data: data,
@@ -287,7 +287,7 @@ let setShelvesContent = (allProducts) => {
 	categories.forEach(category => {
 
 		let shelveClone = shelve.cloneNode(true);
-		shelveClone.classList.add(category.name.replaceAll(" ", "-"));
+		shelveClone.classList.add(category.name.replace(" ", "-"));
 		shelveClone.querySelector(".title h1").innerText = category.name;
 
 		let products = allProducts.filter(product => {

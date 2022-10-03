@@ -31,12 +31,12 @@ public class UserServices {
 		return userRepository.findByEmail(email);
 	}
 
-	public User findByEmailAndPassword(String username, String password) {
-		return userRepository.findByUsernameAndPassword(username, password);
+	public User findByEmailAndPassword(String email, String password) {
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 
 	public User checkUser(User user) {
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
 	}
 
 	public User checkUser(User user, boolean isPasswordEncoded) {
@@ -63,7 +63,7 @@ public class UserServices {
 
 	public Permission getPermission(User user) {
 		Role role = user.getRole();
-		return null;
+		return permissionRepository.findByRoleId(role.getId());
 	}
 
 }
