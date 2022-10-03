@@ -768,13 +768,13 @@ body {
     }
 
     to {
-        height: 480px;
+        height: 580px;
     }
 }
 
 @keyframes signUpToSignIn {
     from {
-        height: 480px;
+        height: 580px;
     }
 
     to {

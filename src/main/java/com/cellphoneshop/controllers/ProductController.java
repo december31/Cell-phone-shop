@@ -42,30 +42,8 @@ public class ProductController {
 	}
 
 	@ResponseBody
-	@PostMapping(path = "new-product")
+	@PostMapping(path = "new")
 	public String newProduct(HttpServletRequest request) throws IOException, ServletException {
-//		request.setCharacterEncoding("UTF-8");
-
-//		check user's permission
-//		? why cookies is null
-//		System.out.println(Arrays.toString(request.getCookies()));
-//		User user = userServices.getUserFromCookie(request);
-//		if(user == null) return "sign in is required";
-//		String userPermissionName = userServices.getPermission(user).getName();
-//		if(userPermissionName.equals(PermissionConst.USER_PERMISSION)) {
-//			return ResponseTextConst.NO_PERMISSION;
-//		}
-
-		String token = request.getParameter("token");
-		if (token == null) return ResponseTextConst.NO_PERMISSION;
-
-		String userString = Jwt.decodeJWT(token).get("user", String.class);
-		User user = new ObjectMapper().readValue(userString, User.class);
-
-		System.out.println(user);
-
-		if (!(user.getRole().getName().equals(RoleConst.ADMIN) || user.getRole().getName().equals(RoleConst.EDITOR)))
-			return ResponseTextConst.NO_PERMISSION;
 
 		// get category id
 		long categoryId;
@@ -106,7 +84,7 @@ public class ProductController {
 	}
 
 	@ResponseBody
-	@PostMapping(path = "delete-product")
+	@PostMapping(path = "delete")
 	public void deleteProduct(HttpServletRequest request) {
 		Long id = Long.valueOf(request.getHeader("id"));
 		productServices.deleteProduct(id);

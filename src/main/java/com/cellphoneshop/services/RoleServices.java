@@ -18,7 +18,9 @@ public class RoleServices {
 		this.roleRepository = roleRepository;
 	}
 
-	public List<Role> getAllRoles() {return roleRepository.findAll();}
+	public List<Role> getAllRoles() {
+		return roleRepository.findAll();
+	}
 
 	public boolean deleteRole(Role role) {
 		if(role == null) return false;
