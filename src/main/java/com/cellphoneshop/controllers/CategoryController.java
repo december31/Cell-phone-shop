@@ -21,10 +21,12 @@ import java.util.List;
 public class CategoryController {
 
 	private final CategoryServices categoryServices;
+	private final UserServices userServices;
 
 	@Autowired
-	public CategoryController(CategoryServices categoryServices) {
+	public CategoryController(CategoryServices categoryServices, UserServices userServices) {
 		this.categoryServices = categoryServices;
+		this.userServices = userServices;
 	}
 
 	@GetMapping
@@ -32,18 +34,18 @@ public class CategoryController {
 		return categoryServices.getAllCategory();
 	}
 
-	@PostMapping("new")
+	@PostMapping("new-category")
 	public String addNewCategory(HttpServletRequest request) {
-		String name = request.getParameter("name");
-		Long id = Long.parseLong(request.getParameter("id"));
-		categoryServices.addNewCategory(new Category(id, name));
-		return ResponseTextConst.SUCCESS;
+			String name = request.getParameter("name");
+			Long id = Long.parseLong(request.getParameter("id"));
+			categoryServices.addNewCategory(new Category(id, name));
+			return ResponseTextConst.SUCCESS;
 	}
 
-	@PostMapping("save")
+	@PostMapping("save-categories")
 	public String saveAllCategories(HttpServletRequest request) throws JsonProcessingException {
 		Category[] categories = new ObjectMapper().readValue(request.getParameter("data"), Category[].class);
-		for (Category category : categories) {
+		for(Category category : categories) {
 			categoryServices.updateCategory(category);
 		}
 		return ResponseTextConst.SUCCESS;

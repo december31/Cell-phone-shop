@@ -1,7 +1,8 @@
 package com.cellphoneshop.models;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Role {
@@ -10,9 +11,6 @@ public class Role {
 	private Long id;
 
 	private String name;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Permission> permissions;
 
 	public Role() {
 	}
@@ -41,13 +39,5 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Permission> getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
 	}
 }
